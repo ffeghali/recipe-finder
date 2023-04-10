@@ -18,14 +18,10 @@ router.get('/:id', getRecipeById)
 // POST a new recipe
 router.post('/', createRecipe)
 
-// DELETE a recipe
-router.delete('/:id', (req, res) => {
-  res.json({mssg: 'DELETE a recipe'})
-})
-
 // UPDATE a recipe
-router.patch('/:id', (req, res) => {
-  res.json({mssg: 'UPDATE a recipe'})
-})
+router.patch('/:id', updateRecipe)
+
+// DELETE a recipe
+router.delete('/:id', deleteRecipe)
 
 module.exports = router

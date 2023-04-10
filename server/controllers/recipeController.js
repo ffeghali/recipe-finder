@@ -33,17 +33,45 @@ const createRecipe = async (req, res) => {
         res.status(400).json({error: error.message})
     }
 }
-  
-// DELETE a recipe
-// const deleteRecipe =
-
 
 // UPDATE a recipe
-// const updateRecipe =
+const updateRecipe = async (req, res) => {
+    const { id } = req.params
   
+    // Check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No recipe found.'})
+    }
+    // Get recipe by id and update
+    const recipe = await Recipe.findOneAndUpdate({_id: id}, {
+      ...req.body
+    })
+    if (!recipe) {
+      return res.status(400).json({error: 'No recipe found.'})
+    }
+    res.status(200).json(recipe)
+  }
+  
+// DELETE a recipe
+const deleteRecipe = async (req, res) => {
+    const { id } = req.params
+  
+    // Check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No recipe found.'})
+    }
+    // Get recipe by id and delete
+    const recipe = await Recipe.findOneAndDelete({_id: id})
+    if(!recipe) {
+      return res.status(400).json({error: 'No recipe found.'})
+    }
+    res.status(200).json(recipe)
+  }
 
 module.exports = {
     createRecipe, 
     getAllRecipes, 
-    getRecipeById
+    getRecipeById,
+    updateRecipe, 
+    deleteRecipe
 }
