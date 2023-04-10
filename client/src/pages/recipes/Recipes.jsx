@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 import { useState, useEffect } from "react"
 export default function Recipes() {
-    const [recipes, setRecipes] = useState(null)
+    /* const [recipes, setRecipes] = useState(null)
 
     useEffect(() => {
         const fetchRecipes = async () => {
@@ -15,13 +15,23 @@ export default function Recipes() {
         }
       
         fetchRecipes()
-    }, [])
+    }, []) */
   
+    const recipes = useLoaderData()
     return (
       <div className="recipes">
-       {recipes && recipes.map(recipe => (
-            <p>{recipe.title}</p>
+       {recipes.map(recipe => (
+            <Link to={recipe.url} key={recipe._id}>
+                <p>{recipe.title}</p>
+            </Link>
         ))}
       </div> 
     )
+  }
+
+  // Data Loader
+export const recipesLoader = async () => {
+    const res = await fetch('/api/recipes')
+  
+    return res.json()
   }

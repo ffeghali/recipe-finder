@@ -8,7 +8,7 @@ import {
 // Pages
 import Home from './pages/Home'
 import About from './pages/About'
-import Recipes from './pages/recipes/Recipes'
+import Recipes, { recipesLoader } from './pages/recipes/Recipes'
 
 // Layouts
 import RootLayout from './layouts/RootLayout'
@@ -23,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="recipes" element={<RecipesLayout/>}>
         <Route index 
         element={<Recipes/>}
+        loader={recipesLoader}
         />
       </Route>
     </Route>
