@@ -5,24 +5,23 @@ export default function Recipes() {
 
     useEffect(() => {
         const fetchRecipes = async () => {
-            const response = await fetch('/recipes')
+            const response = await fetch('api/recipes')
             const json = await response.json()
       
             if (response.ok) {
                 setRecipes(json)
+                console.log(json[0].title)
             }
-          }
+        }
       
-          fetchRecipes()
+        fetchRecipes()
     }, [])
   
     return (
       <div className="recipes">
-       {/* {recipes.map(recipe => (
-        <Link to='/' key={recipe._id}>
-          <p>{recipe.title}</p>
-        </Link>
-      ))}  */}
+       {recipes && recipes.map(recipe => (
+            <p>{recipe.title}</p>
+        ))}
       </div> 
     )
   }
