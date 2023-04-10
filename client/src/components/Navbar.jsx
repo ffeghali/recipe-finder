@@ -6,6 +6,7 @@ export default function Navbar(props) {
             <h1>Recipe Finder</h1>
             <NavLink to="/">Home</NavLink>
             <NavLink to="about">About</NavLink>
+            <NavLink to="recipes">Recipe</NavLink>
         </nav>
         
     )
