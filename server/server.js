@@ -18,11 +18,12 @@ app.use((req, res, next) => {
 app.use('/api/recipes', recipeRoutes)
 
 // Connect to db
+PORT = process.env.PORT || 4000
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // Listen for requests after connect to db
-        app.listen(process.env.PORT, () => {
-            console.log("connected to db and listening on port", process.env.PORT)
+        app.listen(PORT, () => {
+            console.log("connected to db and listening")
         })
     })
     .catch((error) => {
